@@ -1,4 +1,4 @@
 # Project25L
-== ProjectDS (DreamScape)
+= ProjectDS (DreamScape)
 
-콘텐츠 제거하고 코드만
+Only Code. Without Content.
