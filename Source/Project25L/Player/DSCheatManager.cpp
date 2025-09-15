@@ -359,6 +359,7 @@ void UDSCheatManager::PrintPlayerItems(int32 PlayerID)
 
 void UDSCheatManager::ApplyBuff(EDSStatType InStatType, EOperationType InOperationType, float InBuffValue, float InDuration)
 {
+#if USING_CHEAT_MANAGER
 	if (ADSPlayerController* PlayerController = Cast<ADSPlayerController>(GetOuterAPlayerController()))
 	{
 		if (ADSCharacter* Character = PlayerController->GetPawn<ADSCharacter>())
@@ -369,10 +370,12 @@ void UDSCheatManager::ApplyBuff(EDSStatType InStatType, EOperationType InOperati
 			}
 		}
 	}
+#endif
 }
 
 void UDSCheatManager::ModifyHP(float Delta)
 {
+#if USING_CHEAT_MANAGER
 	if (ADSPlayerController* PlayerController = Cast<ADSPlayerController>(GetOuterAPlayerController()))
 	{
 		if (ADSCharacter* Character = PlayerController->GetPawn<ADSCharacter>())
@@ -383,5 +386,6 @@ void UDSCheatManager::ModifyHP(float Delta)
 			}
 		}
 	}
+#endif
 }
 
