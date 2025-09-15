@@ -210,7 +210,7 @@ void UDSStatComponent::ApplyBuff(EDSStatType InStatType, EOperationType InOperat
 	if (IsValid(World))
 	{
 		World->GetTimerManager().SetTimer(TimerHandle, TimerDelegate, InDuration, false);
-		BuffTimerHandles.Add(NewEntry.BuffID, TimerHandle);
+		BuffTimerHandles.Add(NewEntry.BuffID, MoveTemp(TimerHandle));
 	}
 
 	UpdateCurrentStat();
