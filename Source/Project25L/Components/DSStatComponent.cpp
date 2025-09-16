@@ -210,7 +210,7 @@ void UDSStatComponent::ApplyBuff(EDSStatType InStatType, EOperationType InOperat
 	if (IsValid(World))
 	{
 		World->GetTimerManager().SetTimer(TimerHandle, TimerDelegate, InDuration, false);
-		BuffTimerHandles.Add(NewEntry.BuffID, TimerHandle);
+		BuffTimerHandles.Add(NewEntry.BuffID, MoveTemp(TimerHandle));
 	}
 
 	UpdateCurrentStat();
@@ -232,8 +232,9 @@ void UDSStatComponent::RemoveBuff(int32 InBuffID)
 		EOperationType RemovedBuffOperationType = ActiveBuffs.Entries[RemovedIndex].OperationType;
 		DS_LOG(DSStatLog, Log, TEXT("%s 버프 제거: ID=%d, %s %f"), *UEnum::GetValueAsString(RemovedBuffStatType), InBuffID, *UEnum::GetValueAsString(RemovedBuffOperationType), RemovedBuffValue);
 #endif
+		FBuffEntry& ItemToRemove = ActiveBuffs.Entries[RemovedIndex];
+		ActiveBuffs.MarkItemDirty(ItemToRemove);
 		ActiveBuffs.Entries.RemoveAt(RemovedIndex);
-		ActiveBuffs.MarkArrayDirty();
 		BuffTimerHandles.Remove(InBuffID);
 
 		UpdateCurrentStat();
