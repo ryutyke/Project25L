@@ -15,6 +15,9 @@ class PROJECT25L_API UBoneToComponentAnimMetaData : public UAnimMetaData
 	GENERATED_BODY()
 	
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float Rate;
+
 	// 시간(초)
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<float> Times;

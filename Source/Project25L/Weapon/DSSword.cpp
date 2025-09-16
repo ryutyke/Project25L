@@ -378,14 +378,14 @@ bool ADSSword::GetSocketPosAtTime(float AnimTime, TArray<FVector>& OutSocketPos,
 	}
 	CurrentIndex = Low;
 
-	
+	float SampleRate = MetaData->Rate;
+
 	/*
 	Todo : (다른 곳에 적용하게 되면)
-	1. Sampling Rate 변수로 넣어서 고려해 줘야 함. 
-	2. a DeltaTime 만큼 빼줘야 하는 원인 찾기.
+	1. a DeltaTime 만큼 빼줘야 하는 원인 찾기.
 	*/
-	int32 EmpiricalNum = FMath::Max(0, CurrentIndex - (11 * CurrentAttackAnim->RateScale));
-	
+	int32 EmpiricalNum = FMath::Max(0, CurrentIndex - (11 * (SampleRate / 600.f) * CurrentAttackAnim->RateScale));
+
 	const FTransform& BoneToSKMComponent = MetaData->BoneToComponent[EmpiricalNum]; // 3번
 
 	const FTransform& BoneToWorld = BoneToSKMComponent * InComponentToWorld; // 1번, 2번

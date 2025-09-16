@@ -111,6 +111,8 @@ bool UAnimMetaBakerLibrary::BakeSequenceBoneToComponentMetaAndSave(USkeletalMesh
 	Meta->Times.Reset();
 	Meta->BoneToComponent.Reset();
 
+	Meta->Rate = SampleRate;
+
 	const float Length = AnimSequence->GetPlayLength();
 	const float DtSample = (SampleRate > 0.f) ? (1.f / SampleRate) : (1.f / 120.f);
 
@@ -212,6 +214,8 @@ bool UAnimMetaBakerLibrary::BakeMontageBoneToComponentMetaAndSave(TSubclassOf<AC
 	Meta->Times.Reset();
 	Meta->BoneToComponent.Reset();
 
+	Meta->Rate = SampleRate;
+
 	const float Length = Montage->GetPlayLength();
 	const float Dt = (SampleRate > 0.f) ? (1.f / SampleRate) : (1.f / 60.f);
 
@@ -286,6 +290,8 @@ bool UAnimMetaBakerLibrary::CopyBoneToComponentMetaBetweenMontages(UAnimMontage*
 
 	DstMeta->Times = MoveTemp(NewTimes);
 	DstMeta->BoneToComponent = MoveTemp(NewTransforms);
+
+	DstMeta->Rate = SrcMeta->Rate;
 
 	auto SavePkg = [](UObject* Obj)
 		{
