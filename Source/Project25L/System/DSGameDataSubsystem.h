@@ -239,19 +239,19 @@ TRowType* UDSGameDataSubsystem::GetDataRowByEnum(EDataTableType DataTableType, T
 template<typename KeyType, typename AssetType>
 TMap<KeyType, AssetType*>& UDSGameDataSubsystem::GetDataMap()
 {
-	static TMap<KeyType, AssetType*> DataMap;
+	static TMap<KeyType, TWeakObjectPtr<AssetType>> DataMap;
 	return DataMap;
 }
 
 template<typename KeyType, typename AssetType>
 const AssetType* UDSGameDataSubsystem::GetDataAssetByType(KeyType InKey)
 {
-	const TMap<KeyType, AssetType*>& DataMap = GetDataMap<KeyType, AssetType>();
-	const AssetType* const* FoundPtr = DataMap.Find(InKey);
+	const TMap<KeyType, TWeakObjectPtr<AssetType>>& DataMap = GetDataMap<KeyType, AssetType>();
+	const TWeakObjectPtr<AssetType>* FoundPtr = DataMap.Find(InKey);
 	
-	if (nullptr != FoundPtr && IsValid(*FoundPtr))
+	if (nullptr != FoundPtr && FoundPtr->IsValid())
 	{
-		return *FoundPtr;
+		return FoundPtr->Get();
 	}
 	else
 	{
