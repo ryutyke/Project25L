@@ -54,7 +54,7 @@ public:
 	const AssetType* GetDataAssetByType(KeyType InKey);
 
 	/**
-	 * @brief Enum 값에 해당하는 이름의 행 데이터(FTableRowBase)를 반환하는 템플릿 함수.
+	 * @brief Enum 값에 해당하는 이름의 행 데이터(FTableRowBase)를 반환하는 템플릿 함수. Tick에서 사용 X.
 	 *
 	 * 주어진 DataType 값을 문자열 변환 후 "::"로 분리해 행 이름을 추출합니다.
 	 * 주어진 EDataTableType에 해당하는 데이터 테이블에 해당 행(TRowType)이 있으면 포인터를, 없으면 nullptr을 반환합니다
